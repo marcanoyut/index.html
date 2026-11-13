@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kizuna BA - Comunidad Japonesa & Fusión en Buenos Aires</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0a0a0c',
+                        cardBg: '#131318',
+                        neonPink: '#ff2a8d',
+                        neonPinkHover: '#e01c78',
+                        neonPurple: '#b026ff',
+                        neonBlue: '#00f0ff',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(255, 42, 141, 0.4), inset 0 0 15px rgba(255, 42, 141, 0.1)',
+                        'neon-glow': '0 0 25px rgba(255, 42, 141, 0.7)',
+                        'neon-blue': '0 0 15px rgba(0, 240, 255, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Caveat & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a0c;
+            color: #f3f4f6;
+        }
+        .neon-text-pink {
+            text-shadow: 0 0 10px rgba(255, 42, 141, 0.8), 0 0 20px rgba(255, 42, 141, 0.5);
+        }
+        .neon-text-white {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+        .neon-border {
+            box-shadow: 0 0 12px rgba(255, 42, 141, 0.4);
+            border: 1px solid rgba(255, 42, 141, 0.6);
+        }
+        .neon-border-hover:hover {
+            box-shadow: 0 0 20px rgba(255, 42, 141, 0.7);
+            border-color: #ff2a8d;
+        }
+        .font-caveat {
+            font-family: 'Caveat', cursive;
+        }
+    </style>
+</head>
+<body class="bg-darkBg min-h-screen flex flex-col justify-between selection:bg-neonPink selection:text-white">
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="sticky top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGO CON MONTE FUJI Y FLORES (SVG Inline) -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 70" class="w-12 h-12">
+                    <path d="M20,55 L55,15 L62,22 L70,22 L77,15 L100,55 Z" stroke="#ff2a8d" stroke-width="2.5" fill="none" style="filter: drop-shadow(0 0 6px #ff2a8d);"/>
+                    <path d="M48,25 Q55,32 65,30 Q72,35 80,25" stroke="#ffffff" stroke-width="1.5" fill="none" style="filter: drop-shadow(0 0 4px #ffffff);"/>
+                    <path d="M 95,50 Q 105,30 98,10" stroke="#ff75c3" stroke-width="1.5" fill="none"/>
+                    <circle cx="98" cy="10" r="3" stroke="#ffffff" fill="#ff2a8d" />
+                </svg>
+                <div>
+                    <span class="font-caveat text-3xl font-bold text-neonPink neon-text-pink tracking-wide">Kizuna</span>
+                    <span class="block text-[10px] tracking-[0.2em] uppercase text-white/80 font-medium">Comunidad Japonesa BA</span>
+                </div>
+            </div>
+
+            <!-- MENÚ DE NAVEGACIÓN DESKTOP -->
+            <nav class="hidden md:flex space-x-1 lg:space-x-3">
+                <button onclick="switchTab('home')" id="btn-home" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neonPink text-white shadow-neon">
+                    <i class="fa-solid fa-house mr-2"></i>Inicio
+                </button>
+                <button onclick="switchTab('directory')" id="btn-directory" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/5">
+                    <i class="fa-solid fa-store mr-2"></i>Directorio (RF01)
+                </button>
+                <button onclick="switchTab('map')" id="btn-map" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/5">
+                    <i class="fa-solid fa-map-location-dot mr-2"></i>Mapa (RF02)
+                </button>
+                <button onclick="switchTab('agenda')" id="btn-agenda" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/5">
+                    <i class="fa-solid fa-calendar-days mr-2"></i>Agenda (RF03)
+                </button>
+                <button onclick="switchTab('apply')" id="btn-apply" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-gray-300 hover:text-white hover:bg-white/5">
+                    <i class="fa-solid fa-handshake mr-2"></i>Postulación (RF05)
+                </button>
+            </nav>
+
+            <!-- BOTÓN MENÚ MÓVIL -->
+            <div class="md:hidden flex items-center">
+                <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2 focus:outline-none">
+                    <i id="mobile-icon" class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MENÚ MÓVIL DESPLEGABLE -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardBg border-b border-white/10 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-white bg-neonPink/20">Inicio</button>
+            <button onclick="switchTab('directory'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:text-white">Directorio (RF01)</button>
+            <button onclick="switchTab('map'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:text-white">Mapa (RF02)</button>
+            <button onclick="switchTab('agenda'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:text-white">Agenda (RF03)</button>
+            <button onclick="switchTab('apply'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-300 hover:text-white">Postulación (RF05)</button>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL / VISTAS -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- 1. VISTA HOME / PRESENTACIÓN -->
+        <section id="tab-home" class="tab-content space-y-12">
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-cardBg via-[#12121a] to-cardBg border border-neonPink/30 p-8 sm:p-16 shadow-neon">
+                <div class="absolute -right-16 -top-16 w-96 h-96 bg-neonPink/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-16 -bottom-16 w-96 h-96 bg-neonPurple/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-3xl space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-neonPink/10 border border-neonPink/30 text-neonPink text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid fa-sparkles"></i> <span>Plataforma Oficial CABA</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        Conectando la <span class="font-caveat text-5xl sm:text-7xl text-neonPink neon-text-pink">Cultura Japonesa</span> y la Fusión en Buenos Aires
+                    </h1>
+                    <p class="text-lg text-gray-300 font-light leading-relaxed">
+                        Descubre el alma de la tradición nipona y apoya la pasión de nuestros emprendimientos nikkei. Un espacio único que unifica la gastronomía de vanguardia, el arte, talleres y eventos en la Ciudad.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <button onclick="switchTab('directory')" class="px-8 py-3.5 rounded-full bg-neonPink hover:bg-neonPinkHover text-white font-semibold transition-all duration-300 shadow-neon flex items-center space-x-2">
+                            <span>Explorar Directorio</span> <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="switchTab('map')" class="px-8 py-3.5 rounded-full bg-transparent hover:bg-white/5 border border-white/30 text-white font-semibold transition-all duration-300 flex items-center space-x-2">
+                            <span>Ver Mapa Interactivo</span> <i class="fa-solid fa-map"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-cardBg p-6 rounded-2xl border border-white/10 hover:border-neonPink/50 transition-all duration-300 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-neonPink/20 flex items-center justify-center text-neonPink text-xl">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Gastronomía & Fusión Nikkei</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Encuentra los mejores restaurantes de ramen, sushi artesanal y propuestas de fusión culinaria única en cada barrio.</p>
+                </div>
+                <div class="bg-cardBg p-6 rounded-2xl border border-white/10 hover:border-neonPink/50 transition-all duration-300 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-neonPurple/20 flex items-center justify-center text-neonPurple text-xl">
+                        <i class="fa-solid fa-paintbrush"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Talleres & Cultura Tradicional</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Sumérgete en talleres de caligrafía shodo, cerámica kintsugi, ikebana y ceremonias de té ancestrales.</p>
+                </div>
+                <div class="bg-cardBg p-6 rounded-2xl border border-white/10 hover:border-neonPink/50 transition-all duration-300 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-neonBlue/20 flex items-center justify-center text-neonBlue text-xl">
+                        <i class="fa-solid fa-calendar-star"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Agenda de Eventos en Vivo</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">No te pierdas festivales temáticos, ferias gastronómicas y muestras culturales actualizadas semana a semana.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. VISTA DIRECTORIO Y FILTROS (RF01) -->
+        <section id="tab-directory" class="tab-content hidden space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-cardBg p-6 rounded-2xl border border-white/10">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Directorio Cultural y Gastronómico</h2>
+                    <p class="text-gray-400 text-sm">Explora comercios, restaurantes nikkei y centros asociados en CABA (RF01).</p>
+                </div>
+                <!-- Barra de Búsqueda -->
+                <div class="relative w-full md:w-80">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="search-input" oninput="filterDirectory()" placeholder="Buscar por nombre, plato o zona..." class="w-full pl-10 pr-4 py-2.
